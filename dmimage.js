@@ -4,7 +4,8 @@ const path = require('path');
 const http = require('http');
 
 // Replace with your bot token
-const BOT_TOKEN = '7831874636:AAHS4n21kfr8o4hf4w9P6k3vJ6BQzcnArfo'; // Replace with your actual bot token
+const BOT_TOKEN = process.env.TELEGRAM_TOKEN
+// const BOT_TOKEN = '7831874636:AAHS4n21kfr8o4hf4w9P6k3vJ6BQzcnArfo'; // Replace with your actual bot token
 const YOUR_USER_ID = 7442373348; // Replace with your Telegram user ID
 
 // Initialize the bot
@@ -55,8 +56,10 @@ bot.on('message', async (msg) => {
 // Notify that the bot is running
 console.log('Bot is running...');
 
-// Create an HTTP server to listen on a specific port
-const PORT = 3000; // You can change this to any available port
+// Get the port from Heroku environment or default to 3000
+const PORT = process.env.PORT || 3000;
+
+// Create an HTTP server to listen on the specified port
 http
   .createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -65,6 +68,7 @@ http
   .listen(PORT, () => {
     console.log(`HTTP server running on port ${PORT}`);
   });
+
 
 
 
